@@ -1,10 +1,13 @@
 ## TODOS:
 - [ ] fix the issue, where dragging the mouse to a different cell of the same row toggles the selection/ deselection
 - [x] add input that filters table content, add a label that says, how many items are selected
-- [ ] add highlighting of the matching part?
+- [ ] add highlighting of the matching part? 
+- [ ] autocomplete suggestions for filtering input?
 - [ ] add second table
 - [ ] make a button with which one can transfer items from one table to the other
 - [ ] make the action creating a selection in one table clear all selected items in the second table
+- [ ] select and deselect all buttons
+- [ ] ESC to deselect all, ENTER or SPACE to select all/ transfer to the other table
 
 ------------------------
 
