@@ -1,5 +1,10 @@
 ## TODOS:
-- [ ] implement this with RxJS?
+- [ ] fix the issue, where dragging the mouse to a different cell of the same row toggles the selection/ deselection
+- [x] add input that filters table content, add a label that says, how many items are selected
+- [ ] add highlighting of the matching part?
+- [ ] add second table
+- [ ] make a button with which one can transfer items from one table to the other
+- [ ] make the action creating a selection in one table clear all selected items in the second table
 
 ------------------------
 
