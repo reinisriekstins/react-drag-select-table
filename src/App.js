@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 
 const Tr = observer(({ store, state, i }) => {
   const { title, year } = state
-  const { selected, isMouseDown } = store
+  const { selected, isMouseDown, lastToggleSelected } = store
 
   const toggleSelection = () => {
     if ( selected.includes(state) ) {
@@ -14,10 +14,13 @@ const Tr = observer(({ store, state, i }) => {
       selected.push(state)
       console.table([{ action: 'removed', title, year}])
     }
+    console.table([{ title: lastToggleSelected.title, year: lastToggleSelected.year }])
   }
 
   const handleMouseOver = () => {
-    if (isMouseDown.value) toggleSelection()
+    if (isMouseDown.value && state !== lastToggleSelected) {
+      toggleSelection()
+    }
   }
 
   return (
@@ -26,8 +29,8 @@ const Tr = observer(({ store, state, i }) => {
       onMouseDown={ toggleSelection }
       style={(() => {
         if (selected.includes(state))
-          return { 
-            backgroundColor: 'dodgerblue', 
+          return {
+            backgroundColor: 'dodgerblue',
             color: 'white'
           }
         return {}
@@ -41,7 +44,7 @@ const Tr = observer(({ store, state, i }) => {
 })
 
 const App = ({ store }) => {
-  const { isMouseDown, all, filter, visible, selected } = store
+  const { isMouseDown, all, filter, filtered, selected } = store
 
   const noSelect = {
     // WebkitTouchCallout: 'none',
@@ -52,34 +55,52 @@ const App = ({ store }) => {
     userSelect: 'none'
   }
 
+  function emptyArray(arr) {
+    arr.pop()
+    if (arr.length) emptyArray(arr)
+  }
+
   const handleInputChange = e => {
     filter.value = e.target.value
-
-    console.table(
-      selected
-      .slice()
-      .map(({title, year}) => 
-        ({ action: 'removed', title, year })
-      )
-    )
-    function emptyArray(arr) {
-      arr.pop()
-      if (arr.length) emptyArray(arr)
-    }
-
     emptyArray(selected)
   }
 
   return (
     <div className="large-6 columns">
-      <div className="large-6 columns">
-      <label htmlFor="filter">
-        <strong>Filter:</strong>
-      </label>
-      <input type="text" id="filter" value={ filter.value } onChange={ handleInputChange } />
+      <div className="row">
+        <div className="large-6 medium-6 columns">
+        <label htmlFor="filter">
+          <strong>Filter:</strong>
+        </label>
+        <input
+          type="text"
+          id="filter"
+          value={ filter.value }
+          onChange={ handleInputChange } />
+        </div>
+        <div className="large-6 medium-6 columns">
+          <strong>Selected: { selected.length }</strong>
+        </div>
       </div>
-      <div className="large-6 columns">
-        <strong>Selected: { selected.length }</strong>
+      <div className="row">
+        <div className="large-6 medium-6 columns">
+          <button
+            type="button"
+            className="button expanded"
+            onClick={ () => filtered.forEach(x =>
+              !selected.includes(x) && selected.push(x)
+            )}>
+            Select All Visible
+          </button>
+        </div>
+        <div className="large-6 medium-6 columns">
+          <button
+            type="button"
+            className="button expanded"
+            onClick={ () => emptyArray(selected) }>
+            Deselect All
+          </button>
+        </div>
       </div>
       <table style={ noSelect }>
         <thead>
@@ -91,13 +112,13 @@ const App = ({ store }) => {
           </tr>
         </thead>
         <tbody
-          style={{ cursor: 'pointer' }} 
+          style={{ cursor: 'pointer' }}
           onMouseDown={ e => isMouseDown.value = true }
           onMouseUp={ e => isMouseDown.value = false }>
         {(() => {
-          if (visible.length)
-            return visible.map((x, i) =>
-              <Tr key={ i } store={ store } state={ visible[i] } i={ i } />
+          if (filtered.length)
+            return filtered.map((x, i) =>
+              <Tr key={ i } store={ store } state={ filtered[i] } i={ i } />
             )
           else return (
             <tr>
