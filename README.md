@@ -1,13 +1,16 @@
 ## TODOS:
-- [ ] fix the issue, where dragging the mouse to a different cell of the same row toggles the selection/ deselection
+- [x] fix the issue, where dragging the mouse to a different cell of the same row toggles the selection/ deselection
 - [x] add input that filters table content, add a label that says, how many items are selected
-- [ ] add highlighting of the matching part? 
+- [ ] add highlighting of the matching part of filtered rows?
 - [ ] autocomplete suggestions for filtering input?
 - [ ] add second table
 - [ ] make a button with which one can transfer items from one table to the other
 - [ ] make the action creating a selection in one table clear all selected items in the second table
-- [ ] select and deselect all buttons
+- [x] select and deselect all (visible) buttons
 - [ ] ESC to deselect all, ENTER or SPACE to select all/ transfer to the other table
+- [ ] make the table general purpose
+- [ ] rewrite it with mobx strict mode
+- [ ] fix the bug where dragging the mouse to a different cell of the same row SOMETIMES toggles the selection/ deselection
 
 ------------------------
 
@@ -924,7 +927,7 @@ This feature is experimental and still [has major usage issues](https://github.c
 
 ### Editor Integration
 
-If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates. 
+If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.
 
 ![VS Code Jest Preview](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
 
