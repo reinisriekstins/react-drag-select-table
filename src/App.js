@@ -2,19 +2,23 @@ import React from 'react'
 import { observer } from 'mobx-react'
 
 const Tr = observer(({ store, state, i }) => {
-  const { title, year } = state
-  const { selected, isMouseDown, lastToggleSelected } = store
+  const
+    { title,
+      year } = state,
+    { selected,
+      isMouseDown,
+      lastToggleSelected } = store
 
   const toggleSelection = () => {
     if ( selected.includes(state) ) {
       selected.splice( selected.indexOf(state), 1 )
-      console.table([{ action: 'added', title, year }])
+      //console.table([{ action: 'added', title, year }])
     }
     else {
       selected.push(state)
-      console.table([{ action: 'removed', title, year}])
+      //console.table([{ action: 'removed', title, year}])
     }
-    console.table([{ title: lastToggleSelected.title, year: lastToggleSelected.year }])
+    //console.table([{ title: lastToggleSelected.title, year: lastToggleSelected.year }])
   }
 
   const handleMouseOver = () => {
@@ -44,7 +48,11 @@ const Tr = observer(({ store, state, i }) => {
 })
 
 const App = ({ store }) => {
-  const { isMouseDown, all, filter, filtered, selected } = store
+  const {
+    isMouseDown,
+    filter,
+    filtered,
+    selected } = store
 
   const noSelect = {
     // WebkitTouchCallout: 'none',
