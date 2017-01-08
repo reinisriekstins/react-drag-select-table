@@ -1,29 +1,37 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const Tr = ({ store, state, i, children }) => {
+const Tr = props => {
   const {
+    onMouseOver,
+    onMouseDown,
+    children,
+    store,
+    state
+  } = props,
+  {
     selected,
     isMouseDown,
-    lastToggleSelected
-  } = store
+    lastToggleSelected,
+    actions
+  } = store,
+  { toggleSelection } = actions
 
-  const toggleSelection = () => {
-    if ( selected.includes(state) )
-      selected.splice( selected.indexOf(state), 1 )
-    else selected.push(state)
-  }
-
-  const handleMouseOver = () => {
-    if (isMouseDown.value && state !== lastToggleSelected) {
-      toggleSelection()
+  const
+    handleMouseOver = e => {
+      if (isMouseDown.value && state !== lastToggleSelected)
+        toggleSelection(state)
+      if (onMouseOver) onMouseOver(e)
+    },
+    handleMouseDown = e => {
+      toggleSelection(state)
+      if (onMouseDown) onMouseDown(e)
     }
-  }
 
   return (
     <tr
       onMouseOver={ handleMouseOver }
-      onMouseDown={ toggleSelection }
+      onMouseDown={ handleMouseDown }
       style={(() => {
         if (selected.includes(state))
           return {

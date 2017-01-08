@@ -9,7 +9,7 @@
 - [x] select and deselect all (visible) buttons
 - [ ] ESC to deselect all, ENTER or SPACE to select all/ transfer to the other table
 - [x] make the table general purpose
-- [ ] rewrite it with mobx strict mode
+- [x] rewrite it with mobx strict mode
 - [x] fix the bug where dragging the mouse to a different cell of the same row SOMETIMES toggles the selection/ deselection
 - [ ] remove dependencies?
 

@@ -1,15 +1,15 @@
 import React from 'react'
 import { observer } from 'mobx-react'
-import emptyArray from '../utils/emptyArray'
 
 const Filter = props => {
   const
     { store, onChange, ...rest } = props,
-    { filter, selected } = store
+    { filterVal, actions } = store,
+    { updateFilterValue, emptySelected } = actions
 
   const handleChange = e => {
-    filter.value = e.target.value
-    emptyArray(selected)
+    updateFilterValue(e)
+    emptySelected()
 
     if (onChange) onChange(e)
   }
@@ -18,7 +18,7 @@ const Filter = props => {
     <input
       { ...rest }
       type="text"
-      value={ filter.value }
+      value={ filterVal.value }
       onChange={ handleChange }
     />
   )

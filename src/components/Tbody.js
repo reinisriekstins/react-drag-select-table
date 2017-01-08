@@ -15,16 +15,21 @@ const Tbody = props => {
       onMouseUp,
       ...rest
     } = props,
-    { isMouseDown } = store
+    { isMouseDown } = store,
+    { toggleMouseDown } = store.actions
 
   const
     handleMouseDown = e => {
-      isMouseDown.value = true
-      if (onMouseDown) onMouseDown(e)
+      if (isMouseDown.value === false)
+        toggleMouseDown()
+      if (onMouseDown)
+        onMouseDown(e)
     },
     handleMouseUp = e => {
-      isMouseDown.value = false
-      if (onMouseUp) onMouseUp(e)
+      if (isMouseDown.value === true)
+        toggleMouseDown()
+      if (onMouseUp)
+        onMouseUp(e)
     }
 
   return (
