@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, autorun, computed } from 'mobx'
 import { Observable } from 'rxjs/Rx'
 import { toStream, fromStream } from 'mobx-utils'
 import difference from 'lodash/fp/difference'
@@ -20,20 +20,39 @@ const
       return true
     return false
   }),
+  // all the rows selected by the user
   selected = observable([]),
+  // all the rows that are not selected by the user
   unselected = () => difference(all, selected)
 
 const
-  lastSelected$ = Observable
-    .from(toStream(() => last(selected))),
-  lastUnselected$ = Observable
-    .from(toStream(() => last(unselected)))
+  firstSelected$ = Observable
+    .from(toStream(() => selected.slice()))
+    .first()
+    .map(x => x[0]),
+  nextToggleSelected$ = Observable
+    .from(toStream(() => selected.slice()))
+    .pairwise()
+    .map(([prev, curr]) => {
+      if (prev.length < curr.length)
+        return last(curr)
+      return difference(prev, curr)[0]
+    }),
+  lastToggleSelected$ = Observable.merge(
+    firstSelected$, nextToggleSelected$
+  )
 
-const lastToggleSelected = fromStream(
-  Observable.merge(lastSelected$, lastUnselected$)
-)
+const lastToggleSelected =
+  fromStream( lastToggleSelected$ )
 
-export const store = {
+// for debugging purposes:
+// lastToggleSelected$.subscribe(
+//   next => console.log('Toggled', next), //{title: next.title, year: next.year}
+//   err => console.warn(err),
+//   () => console.info('done')
+// )
+
+const store = {
   filter,
   isMouseDown,
   all,
@@ -45,49 +64,13 @@ export const store = {
   }
 }
 
+export default store
 
-
-
-// export const store = {
-//   filter: observable({ value: '' }),
-//   isMouseDown: observable(false),
-//   all: observable(data),
-//   // filtered results
-//   get visible() {
-//    return store.all.filter(x => {
-//       const { title, year } = x
-//       const { value } = store.filter
-//       const filterRegex = new RegExp(value, 'gi')
-
-//       if (filterRegex.test(title) || filterRegex.test(year))
-//         return true
-//       return false
-//     })
-//   },
-//   selected: observable([]),
-//   get unselected() {
-//     return difference(store.all, store.selected)
-//   },
-//   lastSelected$: Observable
-//     .from(toStream(() => last(store.selected))),
-//   lastUnselected$: Observable
-//     .from(toStream(() => last(store.unselected))),
-//   lastToggleSelected$: Observable
-//     .merge(store.lastSelected$, store.lastUnselected$),
-//   get lastToggleSelected() {
-//     return fromStream(store.lastToggleSelected$)
-//   }
-// }
-
-// const lastSelected$ = Observable
-//   .from(toStream(() => last(store.selected)))
-
-// const lastUnselected$ = Observable
-//   .from(toStream(() => last(store.unselected)))
-
-// const lastToggleSelected$ = Observable
-//   .merge(lastSelected$, lastUnselected$)
-
-// store.lastToggleSelected = computed(() => {
-//   return fromStream(lastToggleSelected$)
+// autorun(() => {
+//   try {
+//     console.table([{
+//       title: store.lastToggleSelected.title,
+//       year: store.lastToggleSelected.year
+//     }])
+//   } catch (e) {}
 // })
