@@ -12,9 +12,9 @@ const map = cappedArgMap.convert({ cap: false })
 import './foundation.css'
 import data from './sample-data'
 
-const store = window.store = CreateStore(data)
+const store = window.store = CreateStore(data, false)
 
-const MyTable = observer(props => {
+let MyTable = props => {
   const { store, ...rest } = props
   return (
     <table { ...rest }>
@@ -57,7 +57,9 @@ const MyTable = observer(props => {
       </Tbody>
     </table>
   )
-})
+}
+
+MyTable = observer(MyTable)
 
 render(
   <div className="row">
