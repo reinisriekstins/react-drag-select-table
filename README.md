@@ -8,9 +8,10 @@
 - [ ] make the action creating a selection in one table clear all selected items in the second table
 - [x] select and deselect all (visible) buttons
 - [ ] ESC to deselect all, ENTER or SPACE to select all/ transfer to the other table
-- [ ] make the table general purpose
+- [x] make the table general purpose
 - [ ] rewrite it with mobx strict mode
 - [x] fix the bug where dragging the mouse to a different cell of the same row SOMETIMES toggles the selection/ deselection
+- [ ] remove dependencies?
 
 ------------------------
 
