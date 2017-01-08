@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-import { store } from './store'
+import store from './store'
 
 import './foundation.css'
 import './index.css'
