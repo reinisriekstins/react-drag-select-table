@@ -4,11 +4,11 @@ import { observer } from 'mobx-react'
 const SelectAllVisible = props => {
   const
     { store, children, onClick, ...rest } = props,
-    { selected, filtered } = store
+    { filtered, actions } = store,
+    { pushStateIntoSelected } = actions
 
   const handleClick = e => {
-    filtered.forEach(x =>
-      !selected.includes(x) && selected.push(x))
+    filtered.forEach(pushStateIntoSelected)
     if (onClick) onClick(e)
   }
   return (

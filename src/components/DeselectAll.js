@@ -1,14 +1,13 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-import emptyArray from '../utils/emptyArray'
-
 const DeselectAll = props => {
   const
     { store, children, onClick, ...rest } = props,
-    { selected } = store
+    { emptySelected } = store.actions
+
   const handleClick = e => {
-    emptyArray(selected)
+    emptySelected()
     if (onClick) onClick(e)
   }
   return (
