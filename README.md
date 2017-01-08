@@ -12,6 +12,7 @@
 - [x] rewrite it with mobx strict mode
 - [x] fix the bug where dragging the mouse to a different cell of the same row SOMETIMES toggles the selection/ deselection
 - [ ] remove dependencies (lodash, rxjs)?
+- [ ] fix the useStrict fromStream mobx invariant error bug
 
 ------------------------
 
