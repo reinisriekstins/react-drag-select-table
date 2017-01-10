@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const Tr = props => {
+export const Tr = observer(props => {
   const {
     onMouseOver,
     onMouseDown,
@@ -43,6 +43,6 @@ const Tr = props => {
       { children }
     </tr>
   )
-}
+})
 
-export default observer(Tr)
+Tr.displayName = 'Tr'

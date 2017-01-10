@@ -1,8 +1,11 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const Selected = ({ store, label = 'Selected: ' }) => (
-  <strong>{ label }{ store.selected.length }</strong>
+export const Selected = observer(({ store, label = 'Selected: ' }) => (
+    <span>
+      <strong>{ label }</strong>
+      <strong>{ store.selected.length }</strong>
+    </span>
+  )
 )
-
-export default observer(Selected)
+Selected.displayName = 'Selected'

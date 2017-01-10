@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const Filter = props => {
+export const Filter = observer(props => {
   const
     { store, onChange, ...rest } = props,
     { filterVal, actions } = store,
@@ -22,6 +22,5 @@ const Filter = props => {
       onChange={ handleChange }
     />
   )
-}
-
-export default observer(Filter)
+})
+Filter.displayName = 'Filter'

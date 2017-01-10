@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const DeselectAll = props => {
+export const DeselectAll = observer(props => {
   const
     { store, children, onClick, ...rest } = props,
     { emptySelected } = store.actions
@@ -18,6 +18,5 @@ const DeselectAll = props => {
       { children }
     </button>
   )
-}
-
-export default observer(DeselectAll)
+})
+DeselectAll.displayName = 'DeselectAll'

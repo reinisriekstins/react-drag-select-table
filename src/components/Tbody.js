@@ -1,12 +1,12 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const defaultStyle = () => ({
+export const defaultStyle = () => ({
   cursor: 'pointer',
   userSelect: 'none'
 })
 
-const Tbody = props => {
+export const Tbody = observer(props => {
   const
     { store,
       children,
@@ -41,8 +41,6 @@ const Tbody = props => {
       { children }
     </tbody>
   )
-}
+})
 
-Tbody.defaultStyle = defaultStyle
-
-export default observer(Tbody)
+Tbody.displayName = 'Tbody'

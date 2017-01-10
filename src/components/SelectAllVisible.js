@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-const SelectAllVisible = props => {
+export const SelectAllVisible = observer(props => {
   const
     { store, children, onClick, ...rest } = props,
     { filtered, actions } = store,
@@ -19,6 +19,5 @@ const SelectAllVisible = props => {
       { children }
     </button>
   )
-}
-
-export default observer(SelectAllVisible)
+})
+SelectAllVisible.displayName = 'SelectAllVisible'
