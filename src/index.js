@@ -1,65 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Tbody, Tr } from './components/DragSelect' //{ Tbody, Tr }
-import SelectAllVisible from './components/SelectAllVisible'
-import DeselectAll from './components/DeselectAll'
-import Selected from './components/Selected'
-import Filter from './components/Filter'
-import CreateStore from './store'
-import { observer } from 'mobx-react'
-import cappedArgMap from 'lodash/fp/map'
-const map = cappedArgMap.convert({ cap: false })
-import './foundation.css'
+import {
+  Table,
+  SelectAllVisible,
+  DeselectAll,
+  Selected,
+  Filter,
+  CreateStore
+} from './exports'
+
 import data from './sample-data'
+import './foundation.css'
 
-const store = window.store = CreateStore(data, false)
-
-let MyTable = props => {
-  const { store, ...rest } = props
-  return (
-    <table { ...rest }>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Year</th>
-        </tr>
-      </thead>
-      <Tbody store={ store }>
-      {
-        (() => {
-          const { filtered } = store
-          if (filtered.length)
-            return map((state, i) => {
-              const { title, year } = state
-              return (
-                <Tr
-                  key={ i }
-                  store={ store }
-                  state={ state }
-                  i={ i }>
-                  <td>{ i }</td>
-                  <td>{ title }</td>
-                  <td>{ year }</td>
-                </Tr>
-              )
-            })(filtered)
-          return (
-            <tr>
-              <td></td>
-              <td>None found.</td>
-              <td></td>
-              <td></td>
-            </tr>
-          )
-        })()
-      }
-      </Tbody>
-    </table>
-  )
-}
-
-MyTable = observer(MyTable)
+const store = window.store = CreateStore(data)
 
 render(
   <div className="row">
@@ -87,7 +40,7 @@ render(
           </DeselectAll>
         </div>
       </div>
-      <MyTable store={ store } />
+      <Table store={ store } />
     </div>
     <div className="large-6 columns">
     </div>
