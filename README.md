@@ -11,8 +11,7 @@
 - [x] make the table general purpose
 - [x] rewrite it with mobx strict mode
 - [x] fix the bug where dragging the mouse to a different cell of the same row SOMETIMES toggles the selection/ deselection
-- [ ] remove dependencies (lodash, rxjs)?
-- [ ] fix the useStrict fromStream mobx invariant error bug
+- [x] fix the useStrict fromStream mobx invariant error bug (was a bug in mobx-utils, submitted issue, author fixed it)
 
 ------------------------
 
