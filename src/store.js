@@ -6,7 +6,7 @@ import last from 'lodash/fp/last'
 import filter from 'lodash/fp/filter'
 import emptyArray from './utils/emptyArray'
 
-export default (data, strict = true) => {
+export function CreateStore(data, strict = true) {
 
   useStrict(strict)
 
