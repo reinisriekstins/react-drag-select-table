@@ -2,7 +2,7 @@
   "name": "build/static/js/react-drag-select-table",
   "main": "main.84bb127a.js",
   "readme": "A set of components written with React, Mobx and a touch of RxJS and lodash for creating tables, whose rows can be selected.",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
