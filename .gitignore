@@ -7,7 +7,10 @@ node_modules
 coverage
 
 # production
-build
+*.map
+build/asset-manifest.json
+build/favicon.ico
+build/index.html
 
 # misc
 .DS_Store
