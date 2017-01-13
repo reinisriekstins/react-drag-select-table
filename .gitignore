@@ -8,9 +8,8 @@ coverage
 
 # production
 *.map
-build/asset-manifest.json
-build/favicon.ico
-build/index.html
+build
+lib
 
 # misc
 .DS_Store
